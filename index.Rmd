@@ -12,3 +12,12 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to the US legal system. I found an interesting dataset on Supreme Court decisions released by the Washington University Law school—it would be great to analyze historical trends in SCOTUS decision making, or perhaps analyze variations in the Supreme Court decisions vary from public opinion. I may also be interested in studying inequality in the outcomes of children in the US, depending on where they grow up . Differences or similarities in life outcomes dependings on where kids grow up in the US would be very interesting to me.
+
+```{r}
+
+library(readr)
+
+justices<-read_csv("data/justices.csv")
+
+```
+
