@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/codebook.csv","data/justices.csv","data/scotus.csv","data/scotusrdata.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1519,7 +1519,56 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>I am interested in exploring data related to the US legal system. I found an interesting dataset on Supreme Court decisions released by the Washington University Law school—it would be great to analyze historical trends in SCOTUS decision making, or perhaps analyze variations in the Supreme Court decisions vary from public opinion. I may also be interested in studying inequality in the outcomes of children in the US, depending on where they grow up . Differences or similarities in life outcomes dependings on where kids grow up in the US would be very interesting to me.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="milestone-2">Milestone 2:</h2>
+<p>I loaded the dataset on Supreme Court justices from the Washington University Law School. <a href="http://scdb.wustl.edu/" class="uri">http://scdb.wustl.edu/</a>. I am not sure if this is the final data set I will use—it does seem like a pretty big data set, but I am looking forward to playing around with it. At the core of my project, I want to better understand the legal decisions of Supreme Court justices. My research question surrounds whether the origin state of the case impact the judges’ decision. My hypothesis is that it does not—the Supreme Court is supposed to be immune to political pressures and should not be swayed by whether the origin of the case is a swing state or not. At the same time, the presidents that appoint the justices are very much swayed by the politics of swing states, and the justices might be affected by this. I could measure the explanatory variable by whether or not it is a swing state (there are seven). I could measure the outcome variable by whether the decision is close to the swing states’ preferences.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/tinytex'>tinytex</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>scotus</span><span class='op'>&lt;-</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/scotus.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>codebook</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/codebook.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>codebook</span></span></code></pre>
+</div>
+<pre><code># A tibble: 95 × 3
+   Variable     Description                                     Codes 
+   &lt;chr&gt;        &lt;chr&gt;                                           &lt;chr&gt; 
+ 1 weight       Post-stratification weight (provided by YouGov)  &lt;NA&gt; 
+ 2 Demographics &lt;NA&gt;                                             &lt;NA&gt; 
+ 3 gender       Gender                                          &quot;1 \&quot;…
+ 4 age4         Age                                             &quot;1 \&quot;…
+ 5 race         Race                                            &quot;1 \&quot;…
+ 6 educ4        Education                                       &quot;1 \&quot;…
+ 7 rep          Republican                                      &quot;1 \&quot;…
+ 8 dem          Democrat                                        &quot;1 \&quot;…
+ 9 weight       Survey Weight                                    &lt;NA&gt; 
+10 educ         Education                                       &quot;1 Le…
+# ℹ 85 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://tibble.tidyverse.org/reference/view.html'>view</a></span><span class='op'>(</span><span class='va'>scotus</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>scotus</span> <span class='op'>&lt;-</span> <span class='va'>scotus</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>party <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span> </span>
+<span>    <span class='va'>pid7</span> <span class='op'>&lt;=</span> <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Democrat"</span>,</span>
+<span>    <span class='va'>pid7</span> <span class='op'>==</span> <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"Moderate/Independent"</span>,</span>
+<span>    <span class='va'>pid7</span> <span class='op'>&gt;=</span> <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Republican"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>covid_hist</span> <span class='op'>&lt;-</span> <span class='va'>scotus</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>party</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>party</span>, y <span class='op'>=</span> <span class='va'>current_chief_correct</span>, fill <span class='op'>=</span> <span class='va'>party</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>covid_hist</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

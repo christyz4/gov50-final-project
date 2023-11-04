@@ -31,4 +31,22 @@ codebook
 
 view(scotus)
 ```
+```{r}
+scotus <- scotus |>
+  mutate(party = case_when( 
+    pid7 <= 3 ~ "Democrat",
+    pid7 == 4 ~ "Moderate/Independent",
+    pid7 >= 5 ~ "Republican"))
+
+covid_hist <- scotus |>
+  group_by(party) |>
+  ggplot(aes(x = party, y = current_chief_correct, fill = party)) + 
+  geom_bar(stat = "identity") +
+  labs( x= "Party Affiliation",
+        y = "Correctly Identified Current Supreme Court Chief Justice")
+
+covid_hist
+```
+
+
 
