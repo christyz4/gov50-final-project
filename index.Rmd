@@ -20,8 +20,14 @@ I loaded the dataset on Supreme Court justices from the Washington University La
 ```{r}
 
 library(readr)
+library(tidyverse)
+library(tinytex)
 
-justices<-read_csv("data/justices.csv")
+scotus<-read_csv("data/scotus.csv")
+
+codebook <- read_csv("data/codebook.csv")
+
+codebook
 
 ```
 
