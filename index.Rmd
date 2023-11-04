@@ -13,7 +13,7 @@ output:
 
 I am interested in exploring data related to the US legal system. I found an interesting dataset on Supreme Court decisions released by the Washington University Law school—it would be great to analyze historical trends in SCOTUS decision making, or perhaps analyze variations in the Supreme Court decisions vary from public opinion. I may also be interested in studying inequality in the outcomes of children in the US, depending on where they grow up . Differences or similarities in life outcomes dependings on where kids grow up in the US would be very interesting to me.
 
-Milestone 2: 
+## Milestone 2: 
 
 I loaded the dataset on Supreme Court justices from the Washington University Law School. http://scdb.wustl.edu/. I am not sure if this is the final data set I will use—it does seem like a pretty big data set, but I am looking forward to playing around with it. At the core of my project, I want to better understand the legal decisions of Supreme Court justices. My research question surrounds whether the origin state of the case impact the judges' decision. My hypothesis is that it does not—the Supreme Court is supposed to be immune to political pressures and should not be swayed by whether the origin of the case is a swing state or not. At the same time, the presidents that appoint the justices are very much swayed by the politics of swing states, and the justices might be affected by this. I could measure the explanatory variable by whether or not it is a swing state (there are seven). I could measure the outcome variable by whether the decision is close to the swing states' preferences. 
 
@@ -29,6 +29,6 @@ codebook <- read_csv("data/codebook.csv")
 
 codebook
 
-view(codebook)
+view(scotus)
 ```
 
