@@ -29,5 +29,6 @@ codebook <- read_csv("data/codebook.csv")
 
 codebook
 
+view(codebook)
 ```
 
