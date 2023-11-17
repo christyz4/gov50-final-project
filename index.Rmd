@@ -31,6 +31,9 @@ codebook
 
 view(scotus)
 ```
+
+## Milestone 3
+
 ```{r}
 scotus <- scotus |>
   mutate(party = case_when( 
@@ -48,5 +51,23 @@ covid_hist <- scotus |>
 covid_hist
 ```
 
+## Milestone 4
+```{r}
 
+scotus$azcollectballot_per <- as.integer(scotus$azcollectballot_per)
+
+scotus |>
+  ggplot(mapping = aes(azcollectballot_per)) +
+  geom_bar(fill = c("dodgerblue", "red")) +
+  labs(
+    x = "Should voters be able to rely on another person or third party to collect and drop off ballots ( 1 = Yes, 2 = No)",
+    y = "Count",
+    title = "Public Opinion on Brnovich v. Democratic National Committee"
+  )
+
+	
+
+
+```
+This graph shows that for the Brnovich v. Democratic National Committee case, the Supreme Court of the United States is more right-leaning, or conservative, than the public. The question at hand is whether states should or should not allow voters to rely on another person or third party to collect and drop off ballots, with "Yes" = 1 and "No" = 2. As you can see from the graph, the individuals surveyed were pretty split on the issue, with a slight preference toward the "Yes" or left-leaning position. Yet, the Supreme Court ruled "No," with 6 in favor and 3 against. The fact that the court has a decisive Conservative majority shows in this case, as the justices are quite far from the alignment of the public. 
 
