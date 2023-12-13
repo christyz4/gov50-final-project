@@ -1,21 +1,97 @@
 ---
 title: "Gov 50 Final Project"
 author: Christy Zheng
-description: "My final project"
+description: How does sleep affect daily stress levels?
 output:
   distill::distill_article:
     self_contained: false
 ---
 
+# Introduction
+
+
+# The Data
+
+### Loading the Data
+
+```{r}
+#Load Packages
+
+library(tidyverse)
+library(readr)
+library(tinytex)
+
+#Load dataset
+
+wellbeing <- read_csv("data/Wellbeing_and_lifestyle_data_Kaggle.csv")
+
+#Prepare data by making sure the variables are numbers
+
+wellbeing$num_daily_stress = as.numeric(wellbeing$DAILY_STRESS)
+wellbeing$num_sleep_hours = as.numeric(wellbeing$SLEEP_HOURS)
+
+#Data visualization for the main outcome of interest
+
+grouped <- wellbeing |>
+  select(num_daily_stress, num_sleep_hours) |>
+  group_by(num_sleep_hours) |>
+  summarize(mean_stress = mean(num_daily_stress, na.rm = TRUE)) |>
+  as.data.frame()
+
+ggplot(grouped, aes(x = num_sleep_hours, y = mean_stress)) +
+  geom_point() + geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Relationship Between Hours of Sleep and Mean Stress Score", x = "Hours of Sleep", y = "Mean Stress Score (1-5)")
+
+```
+#Results
+```{r}
+fit <- lm(num_daily_stress ~ num_sleep_hours, data = wellbeing)
+
+fit
+
+mult.fit <-lm(num_daily_stress ~ num_sleep_hours + LOST_VACATION + WEEKLY_MEDITATION + DAILY_STEPS + DAILY_SHOUTING + TODO_COMPLETED, data = wellbeing)
+mult.fit
+
+var_labels <- c(
+"(Intercept)" = "Intercept",
+"num_sleep_hours" = "Hours of Sleep",
+"LOST_VACATION" = "Lost Vacation Days",
+"WEEKLY_MEDITATION" = "Hours of Meditation (Weekly)",
+"DAILY_STEPS" = "Number of Daily Steps",
+"DAILY_SHOUTING" = "Number of Times Shouting Per Day",
+"TODO_COMPLETED" = "Number of Tasks Completed"
+)
+
+modelsummary::modelsummary(mult.fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           coef_map = var_labels,
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Project thoughts
 
-I am interested in exploring data related to the US legal system. I found an interesting dataset on Supreme Court decisions released by the Washington University Law school—it would be great to analyze historical trends in SCOTUS decision making, or perhaps analyze variations in the Supreme Court decisions vary from public opinion. I may also be interested in studying inequality in the outcomes of children in the US, depending on where they grow up . Differences or similarities in life outcomes dependings on where kids grow up in the US would be very interesting to me.
+I am interested in exploring data related to the US legal system. I found an interesting dataset on Supreme Court decisions released by the Washington University Law school---it would be great to analyze historical trends in SCOTUS decision making, or perhaps analyze variations in the Supreme Court decisions vary from public opinion. I may also be interested in studying inequality in the outcomes of children in the US, depending on where they grow up . Differences or similarities in life outcomes dependings on where kids grow up in the US would be very interesting to me.
 
-## Milestone 2: 
+## Milestone 2:
 
-I loaded the dataset on Supreme Court justices from the Washington University Law School. http://scdb.wustl.edu/. I am not sure if this is the final data set I will use—it does seem like a pretty big data set, but I am looking forward to playing around with it. At the core of my project, I want to better understand the legal decisions of Supreme Court justices. My research question surrounds whether the origin state of the case impact the judges' decision. My hypothesis is that it does not—the Supreme Court is supposed to be immune to political pressures and should not be swayed by whether the origin of the case is a swing state or not. At the same time, the presidents that appoint the justices are very much swayed by the politics of swing states, and the justices might be affected by this. I could measure the explanatory variable by whether or not it is a swing state (there are seven). I could measure the outcome variable by whether the decision is close to the swing states' preferences. 
+I loaded the dataset on Supreme Court justices from the Washington University Law School. <http://scdb.wustl.edu/>. I am not sure if this is the final data set I will use---it does seem like a pretty big data set, but I am looking forward to playing around with it. At the core of my project, I want to better understand the legal decisions of Supreme Court justices. My research question surrounds whether the origin state of the case impact the judges' decision. My hypothesis is that it does not---the Supreme Court is supposed to be immune to political pressures and should not be swayed by whether the origin of the case is a swing state or not. At the same time, the presidents that appoint the justices are very much swayed by the politics of swing states, and the justices might be affected by this. I could measure the explanatory variable by whether or not it is a swing state (there are seven). I could measure the outcome variable by whether the decision is close to the swing states' preferences.
 
 ```{r}
 
@@ -52,6 +128,7 @@ covid_hist
 ```
 
 ## Milestone 4
+
 ```{r}
 
 scotus$azcollectballot_per <- as.integer(scotus$azcollectballot_per)
@@ -67,7 +144,6 @@ scotus |>
 
 	
 
-
 ```
-This graph shows that for the Brnovich v. Democratic National Committee case, the Supreme Court of the United States is more right-leaning, or conservative, than the public. The question at hand is whether states should or should not allow voters to rely on another person or third party to collect and drop off ballots, with "Yes" = 1 and "No" = 2. As you can see from the graph, the individuals surveyed were pretty split on the issue, with a slight preference toward the "Yes" or left-leaning position. Yet, the Supreme Court ruled "No," with 6 in favor and 3 against. The fact that the court has a decisive Conservative majority shows in this case, as the justices are quite far from the alignment of the public. 
 
+This graph shows that for the Brnovich v. Democratic National Committee case, the Supreme Court of the United States is more right-leaning, or conservative, than the public. The question at hand is whether states should or should not allow voters to rely on another person or third party to collect and drop off ballots, with "Yes" = 1 and "No" = 2. As you can see from the graph, the individuals surveyed were pretty split on the issue, with a slight preference toward the "Yes" or left-leaning position. Yet, the Supreme Court ruled "No," with 6 in favor and 3 against. The fact that the court has a decisive Conservative majority shows in this case, as the justices are quite far from the alignment of the public.
