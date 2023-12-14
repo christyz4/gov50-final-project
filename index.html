@@ -1520,36 +1520,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h1 id="introduction">Introduction</h1>
-<p>In 2020, the American Psychiatric Association (APA) declared the nation was
-facing a mental health crisis. “We are facing a national mental health crisis
-that could yield serious health and social consequences for years to come,”
-wrote the APA. Americans were facing increased levels of stress, worsened by
-several external factors, including the pandemic, conflict and uncertainty in
-the government, inflation, and unrest abroad. Stress levels have remained high
-in the past three years, posing a risk to both mental and physical health. In
-their 2022 annual “Stress in America” report, the APA published data revealing
-that 76% of participants had experienced at least one physical or mental symptom
-over the last month as a result of stress. 72% experienced additional symptoms.
-54% stated they fought with their loved ones because of stress. 27% of
-respondents said their stress impaired their ability to function most days.
-Given the significant stress Americans are experiencing and its devastating
-impact, I wanted to focus on factors that might reduce stress for my final
-project. I chose to study the impact of sleep (or lack thereof) on daily stress
-levels.</p>
-<p>According to the Center for Disease Control (CDC), one-third of adults in the
-United States are getting less than the recommended amount of sleep. College
-students sleep an average of 6 to 6.9 hours, falling short of the 7-9 hours
-recommended by the Sleep Foundation. Sleep deprivation leads to and exacerbates
-numerous health issues, both mental and physical. Sleep and stress are very much
-connected—too much or not enough of one affects the other and vice versa. Sleep
-also impacts other health outcomes, such as the risk of diabetes and
-cardiovascular disease. This project examines the impact various amounts of
-sleep have on daily stress levels. I hypothesize that there is a relationship
-between sleep and stress. I predict that more sleep is associated with less
-daily stress, and vice versa. The null hypothesis is there is no relationship
-between sleep and stress.</p>
+<p>In 2020, the American Psychiatric Association (APA) declared the nation was facing a mental health crisis. “We are facing a national mental health crisis that could yield serious health and social consequences for years to come,” wrote the APA. Americans were facing increased levels of stress, worsened by several external factors, including the pandemic, conflict and uncertainty in the government, inflation, and unrest abroad. Stress levels have remained high in the past three years, posing a risk to both mental and physical health. In their 2022 annual “Stress in America” report, the APA published data revealing that 76% of participants had experienced at least one physical or mental symptom over the last month as a result of stress, while 72% experienced additional symptoms. 54% stated they fought with their loved ones because of stress and 27% of respondents said their stress impaired their ability to function most days. Given the significant stress Americans are experiencing and its devastating impact, I wanted to focus on factors that might reduce stress for my final project. I chose to study the impact of sleep (or lack thereof) on daily stress levels.</p>
+<p>According to the Center for Disease Control (CDC), one-third of adults in the United States are getting less than the recommended amount of sleep. College students sleep an average of 6 to 6.9 hours, falling short of the 7-9 hours recommended by the Sleep Foundation. Sleep deprivation leads to and exacerbates numerous health issues, both mental and physical. Sleep and stress are very much connected—too much or not enough of one affects the other and vice versa. Sleep also impacts other health outcomes, such as the risk of diabetes and cardiovascular disease. This project examines the impact various amounts of sleep have on daily stress levels. I hypothesize that there is a relationship between sleep and stress. I predict that more sleep is associated with less daily stress, and vice versa. The null hypothesis is there is no relationship between sleep and stress.</p>
 <h1 id="the-data">The Data</h1>
-<h3 id="loading-the-data">Loading the Data</h3>
+<p>I used the “Lifestyle and Wellbeing Data” from Kaggle, created by Yvon Dalat. The dataset includes 15,972 survey responses collected between July 2015 and March 2021. While the specific geographic reach of respondents is not specified, it is described as a “global survey” and was available on a website (now defunct) that was open to everyone. The survey collected information on the respondent’s age and gender before asking about several factors that might impact their well-being, such as their social network, personal achievements, and the number of fruits and vegetables they consume on a daily basis. Upon completion of the survey, respondents received their “work-life balance score” or “satisfaction score,” which was generated by an algorithm. The work-life balance score is an indication of the respondent’s well-being. Dalat published a book and created an app aimed at helping consumers live a happier life. The dataset appears to have been created to provide research for these endeavors, but his previous research was focused on how to improve the work-life balance score, rather than any interaction between the other factors.</p>
+<h3 id="preparing-the-data-and-data-visualization">Preparing the Data and Data Visualization</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Load Packages</span></span>
@@ -1567,18 +1542,22 @@ between sleep and stress.</p>
 <span><span class='va'>wellbeing</span><span class='op'>$</span><span class='va'>num_daily_stress</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>wellbeing</span><span class='op'>$</span><span class='va'>DAILY_STRESS</span><span class='op'>)</span></span>
 <span><span class='va'>wellbeing</span><span class='op'>$</span><span class='va'>num_sleep_hours</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>wellbeing</span><span class='op'>$</span><span class='va'>SLEEP_HOURS</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='co'>#Data visualization for the main outcome of interest</span></span>
+<span><span class='co'>#Data visualization for daily stress levels</span></span>
 <span><span class='va'>wellbeing</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>num_daily_stress</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>binwidth<span class='op'>=</span><span class='fl'>1</span>, center<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span> <span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Distribution of Daily Stress Scores"</span>, </span>
-<span>        x <span class='op'>=</span> <span class='st'>"Daily Stress Score (0-5)"</span>,</span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span> <span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Distribution of Daily Stress Levels"</span>, </span>
+<span>        x <span class='op'>=</span> <span class='st'>"Daily Stress Level (0-5)"</span>,</span>
 <span>        y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" />
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<p>This research is cross-sectional and observational. I do not make any causal claims. The data for the dependent and independent variables was gathered from survey responses (I do not use the algorithm-generated work-life balance score in this report). The dependent variable is daily stress levels. Respondents were asked “How much stress do you typically experience every day?” and asked to rank it on a scale from 0 to 5. The average daily stress score was 2.79. The visualization of this variable revealed a fairly normal distribution for daily stress levels.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>wellbeing</span> <span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Data visualization for typical hours of sleep</span></span>
+<span><span class='va'>wellbeing</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>num_sleep_hours</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>binwidth <span class='op'>=</span> <span class='fl'>1</span>, center <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1586,12 +1565,13 @@ between sleep and stress.</p>
 <span>       x <span class='op'>=</span> <span class='st'>"Typical Hours of Sleep (1-10)"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-1-2.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
+<p>The independent variable for this report is the respondents’ typical hours of sleep. The original survey question was: “About how long do you typically sleep?” The answers ranged from 1 to 10, with an average of 7.04 hours per night. The average is close to the lower limit of the recommended amount of sleep for adults, which is seven to nine hours per night. The visualization of this variable shows a fairly normal distribution for typical hours of sleep. Adults of all ages responded to this survey, and it is unlikely that the data was drawn from a particularly sleep-deprived population, such as college students.</p>
 <h1 id="results">Results</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Binned Scatterplot</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Binned scatterplot of the relationship between sleep and stress</span></span>
 <span><span class='va'>grouped</span> <span class='op'>&lt;-</span> <span class='va'>wellbeing</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>num_daily_stress</span>, <span class='va'>num_sleep_hours</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>num_sleep_hours</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -1600,18 +1580,24 @@ between sleep and stress.</p>
 <span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>grouped</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>num_sleep_hours</span>, y <span class='op'>=</span> <span class='va'>mean_stress</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Hours of Sleep and Mean Stress Score"</span>, </span>
-<span>       x <span class='op'>=</span> <span class='st'>"Hours of Sleep"</span>, y <span class='op'>=</span> <span class='st'>"Mean Stress Score (0-5)"</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Hours of Sleep and Mean Stress Level"</span>, </span>
+<span>       x <span class='op'>=</span> <span class='st'>"Hours of Sleep"</span>, y <span class='op'>=</span> <span class='st'>"Mean Daily Stress Level (0-5)"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>This binned scatterplot summarizes the relationship between sleep and stress. Each dot represents the mean daily stress level for respondents who typically slept the corresponding number of hours. For example, survey respondents who reported typically sleeping 5 hours per night had a mean daily stress score of 3.22. The binned scatterplot and regression line indicate a negative relationship between sleep and stress that is strongly statistically significant. Fewer hours of sleep is correlated with higher daily stress levels.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Linear Regression</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Linear regression of sleep and stress</span></span>
 <span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>num_daily_stress</span> <span class='op'>~</span> <span class='va'>num_sleep_hours</span>, data <span class='op'>=</span> <span class='va'>wellbeing</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fit</span>,</span>
 <span>                      statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
 <span>                      coef_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>                      <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
 <span>                      <span class='st'>"num_daily_stress"</span> <span class='op'>=</span> <span class='st'>"Daily Stress Experienced (0-5)"</span>, </span>
 <span>                      <span class='st'>"num_sleep_hours"</span> <span class='op'>=</span> <span class='st'>"Typical Hours of Sleep"</span><span class='op'>)</span>,</span>
 <span>                      gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
@@ -1627,6 +1613,28 @@ between sleep and stress.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Intercept
+</td>
+<td style="text-align:center;">
+4.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.064
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Typical Hours of Sleep
@@ -1675,10 +1683,13 @@ R2 Adj.
 </tr>
 </tbody>
 </table>
+</div>
+<p>The first regression examines the bivariate relationship between hours of sleep and daily stress levels. The intercept is 4.053, which, theoretically, means that individuals who typically sleep zero hours would have a mean daily stress level of 4.053. This interpretation has little substantive value, because it is medically impossible for an individual to sleep zero hours per night and survive. The coefficient for typical hours of sleep is -0.179. This indicates that for each additional hour of sleep, daily stress levels decrease by an average of 0.179 points. The p value is less than 0.001, which means this result is statistically significant when alpha equals 0.05. I cannot interpret this relationship as causal because this is a cross-sectional, observational study. Additionally, the relationship between sleep and stress is often characterized as a cycle—increased stress leads to sleep deprivation and vice versa.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Multiple Regression</span></span>
-<span><span class='va'>mult.fit</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>num_daily_stress</span> <span class='op'>~</span> <span class='va'>num_sleep_hours</span> <span class='op'>+</span> <span class='va'>LOST_VACATION</span> <span class='op'>+</span> </span>
-<span>                <span class='va'>WEEKLY_MEDITATION</span> <span class='op'>+</span> <span class='va'>DAILY_STEPS</span> <span class='op'>+</span> <span class='va'>DAILY_SHOUTING</span> <span class='op'>+</span> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Multiple regression of sleep, stress, and other factors</span></span>
+<span><span class='va'>mult.fit</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>num_daily_stress</span> <span class='op'>~</span> <span class='va'>num_sleep_hours</span> <span class='op'>+</span> <span class='va'>LOST_VACATION</span> <span class='op'>+</span> <span class='va'>CORE_CIRCLE</span><span class='op'>+</span></span>
+<span>                <span class='va'>WEEKLY_MEDITATION</span> <span class='op'>+</span> <span class='va'>DAILY_STEPS</span> <span class='op'>+</span> <span class='va'>DAILY_SHOUTING</span> <span class='op'>+</span> <span class='va'>ACHIEVEMENT</span><span class='op'>+</span></span>
 <span>                <span class='va'>TODO_COMPLETED</span>, data <span class='op'>=</span> <span class='va'>wellbeing</span><span class='op'>)</span></span>
 <span></span>
 <span></span>
@@ -1686,10 +1697,12 @@ R2 Adj.
 <span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
 <span><span class='st'>"num_sleep_hours"</span> <span class='op'>=</span> <span class='st'>"Typical Hours of Sleep"</span>,</span>
 <span><span class='st'>"LOST_VACATION"</span> <span class='op'>=</span> <span class='st'>"Lost Vacation Days"</span>,</span>
+<span><span class='st'>"CORE_CIRCLE"</span> <span class='op'>=</span> <span class='st'>"Number of Very Close Loved Ones"</span>,</span>
 <span><span class='st'>"WEEKLY_MEDITATION"</span> <span class='op'>=</span> <span class='st'>"Hours of Meditation (Weekly)"</span>,</span>
 <span><span class='st'>"DAILY_STEPS"</span> <span class='op'>=</span> <span class='st'>"Number of Daily Steps"</span>,</span>
-<span><span class='st'>"DAILY_SHOUTING"</span> <span class='op'>=</span> <span class='st'>"Number of Times Shouting Per Day"</span>,</span>
-<span><span class='st'>"TODO_COMPLETED"</span> <span class='op'>=</span> <span class='st'>"Number of Tasks Completed"</span></span>
+<span><span class='st'>"DAILY_SHOUTING"</span> <span class='op'>=</span> <span class='st'>"Number of Times Shouting or Sulking Per Day"</span>,</span>
+<span><span class='st'>"ACHIEVEMENT"</span> <span class='op'>=</span> <span class='st'>"Number of Remarkable Achievements"</span>,</span>
+<span><span class='st'>"TODO_COMPLETED"</span> <span class='op'>=</span> <span class='st'>"Completeness of Weekly To-Do List"</span></span>
 <span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>mult.fit</span>,</span>
@@ -1714,14 +1727,14 @@ R2 Adj.
 Intercept
 </td>
 <td style="text-align:center;">
-3.667
+3.759
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.067
+s.e. = 0.068
 </td>
 </tr>
 <tr>
@@ -1736,7 +1749,7 @@ p = &lt;0.001
 Typical Hours of Sleep
 </td>
 <td style="text-align:center;">
-−0.104
+−0.103
 </td>
 </tr>
 <tr>
@@ -1777,10 +1790,32 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
+Number of Very Close Loved Ones
+</td>
+<td style="text-align:center;">
+−0.022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Hours of Meditation (Weekly)
 </td>
 <td style="text-align:center;">
-−0.066
+−0.063
 </td>
 </tr>
 <tr>
@@ -1802,7 +1837,7 @@ p = &lt;0.001
 Number of Daily Steps
 </td>
 <td style="text-align:center;">
-−0.005
+−0.001
 </td>
 </tr>
 <tr>
@@ -1816,15 +1851,15 @@ s.e. = 0.004
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.121
+p = 0.788
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Number of Times Shouting Per Day
+Number of Times Shouting or Sulking Per Day
 </td>
 <td style="text-align:center;">
-0.132
+0.131
 </td>
 </tr>
 <tr>
@@ -1843,10 +1878,32 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-Number of Tasks Completed
+Number of Remarkable Achievements
 </td>
 <td style="text-align:center;">
-−0.041
+−0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Completeness of Weekly To-Do List
+</td>
+<td style="text-align:center;">
+−0.031
 </td>
 </tr>
 <tr>
@@ -1876,7 +1933,7 @@ Num.Obs.
 R2
 </td>
 <td style="text-align:center;">
-0.165
+0.170
 </td>
 </tr>
 <tr>
@@ -1884,12 +1941,21 @@ R2
 R2 Adj.
 </td>
 <td style="text-align:center;">
-0.165
+0.169
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>To control for the presence of potential confounders, I performed a multivariate regression that measures the association between sleep, seven other variables, and stress. I chose lost vacation days (in a year), number of very close loved ones, hours of meditation per week, number of daily steps, number of times shouting or sulking per day, number of remarkable achievements, and the completeness of weekly to-do lists. The intercept for this regression is 3.759. This, theoretically, means that when all of these variables are zero—no lost vacation days, no close loved ones, no meditation, no steps, no shouting or sulking, no remarkable achievements, nothing complete on to-do lists, and no sleep—the average daily stress level is 3.759 out of 5. Again, this number has little substantive value, as it is impossible to sleep zero hours every night and survive. The coefficient for typical hours of sleep is -0.103. The magnitude is less now that we have removed some of the confounding variables, but it is still sizable. This means, holding all of the other variables in this regression constant, an additional hour of sleep is associated with a 0.103 reduction in daily stress levels. The p-value is less than 0.001, which means this result is significant when alpha equals 0.05. We cannot establish a causal relationship, because this is an observational, cross-sectional study and because of the aforementioned sleep-stress cycle.</p>
+<p>Besides sleep, nearly all of the other factors have statistically significant associations with stress. All of the variables, except for number of daily steps, have a p-value of less than 0.001, which means it is statistically significant when alpha equals 0.05. Perhaps most notably, the coefficient for number of times shouting or sulking per day is 0.131, which means, holding the other variables constant, an additional instance of shouting or sulking during the day is associated with an increase of 0.131 units for the daily stress level. This effect is slightly larger than the effect for sleep. Another interesting variable is lost vacation days. Holding all other variables constant, one additional lost vacation day per year is associated with a 0.052 unit increase in daily stress levels. This result is statistically significant when alpha equals 0.05.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This research supports my hypothesis that fewer hours of sleep is associated with higher stress levels, which was confirmed by the binned scatterplot, and bivariate and multivariate regressions. All three indicated a negative association, which suggests that individuals who typically get fewer hours of sleep experience higher daily stress levels. The multivariate regression, which controls for several potential counfounders, provides strong evidence for this relationship. This relationship is statistically significant at alpha = 0.05, as demonstrated by both the bivariate and multivariate regressions. The limitations for this research include the inability to establish a causal relationship, because the data gathered was from cross-sectional. Additionally, the data is self-reported, so there is potential recall bias. We also do not know the geographic reach of participants, which may be important to the analysis. In future studies I would perform a randomized experiment to establish causality. I would also consider a longer study, perhaps one that asks participants to track hours of sleep and daily stress levels for a month or longer. Additionally, while working with minors brings more stringent standards, I would also be interested in seeing how sleep impacts stress for high school students, another population that often suffers from both sleep deprivation and stress. These interventions may enhance the accuracy and applicability of the results.</p>
+<h1 id="works-cited">Works Cited</h1>
+<p>Dalat, Yvon. Lifestyle and Wellbeing Data. Kaggle. 14 March 2021. <a href="https://www.kaggle.com/datasets/ydalat/lifestyle-and-wellbeing-data/data" class="uri">https://www.kaggle.com/datasets/ydalat/lifestyle-and-wellbeing-data/data</a></p>
+<p>More than a quarter of U. S. Adults say they’re so stressed they can’t function American Psychological Association. [Press release]. 19 October 2022. <a href="https://www.apa.org/news/press/releases/2022/10/multiple-stressors-no-function" class="uri">https://www.apa.org/news/press/releases/2022/10/multiple-stressors-no-function</a></p>
+<p>“Sleep and Sleep Disorders.” Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 7 Sept. 2022, www.cdc.gov/sleep/index.html.</p>
+<p>“Stress in AmericaTM 2020: A National Mental Health Crisis.” American Psychological Association, American Psychological Association, Oct. 2020, www.apa.org/news/press/releases/stress/2020/report-october.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
